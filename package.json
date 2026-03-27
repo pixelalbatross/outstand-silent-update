@@ -1,0 +1,41 @@
+{
+  "name": "outstand-silent-update",
+  "version": "0.1.0",
+  "description": "Update a post without changing its modified date in the Block Editor.",
+  "contributors": [
+    {
+      "name": "Sérgio Santos",
+      "homepage": "https://s3rgiosan.dev"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/outstand-labs/outstand-silent-update"
+  },
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update",
+    "lint:js": "wp-scripts lint-js",
+    "lint:js:fix": "wp-scripts lint-js --fix",
+    "lint:css": "wp-scripts lint-style",
+    "format": "wp-scripts format"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "@wordpress/components": "^30.9.0",
+    "@wordpress/data": "^10.36.0",
+    "@wordpress/date": "^5.36.0",
+    "@wordpress/edit-post": "^8.36.0",
+    "@wordpress/editor": "^14.36.0",
+    "@wordpress/i18n": "^6.9.0",
+    "@wordpress/plugins": "^7.36.0"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.12.0"
+  }
+}
