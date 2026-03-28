@@ -61,6 +61,10 @@ add_filter( 'outstand_silent_update_post_types', function ( $post_types ) {
 - WordPress 6.7+
 - PHP 8.2+
 
+## Changelog
+
+All notable changes to this project are documented in [CHANGELOG.md](https://github.com/pixelalbatross/outstand-silent-update/blob/main/CHANGELOG.md).
+
 ## License
 
 This project is licensed under the [GPL-3.0-or-later](https://spdx.org/licenses/GPL-3.0-or-later.html).
