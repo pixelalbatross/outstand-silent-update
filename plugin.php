@@ -6,7 +6,7 @@
  * Plugin URI:        https://outstand.site/?utm_source=wp-plugins&utm_medium=outstand-silent-update&utm_campaign=plugin-uri
  * Requires at least: 6.7
  * Requires PHP:      8.2
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            Outstand
  * Author URI:        https://outstand.site/?utm_source=wp-plugins&utm_medium=outstand-silent-update&utm_campaign=author-uri
  * License:           GPL-3.0-or-later
