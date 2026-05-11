@@ -33,9 +33,11 @@ define( 'OUTSTAND_SILENT_UPDATE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OUTSTAND_SILENT_UPDATE_DIST_URL', OUTSTAND_SILENT_UPDATE_URL . 'build/' );
 define( 'OUTSTAND_SILENT_UPDATE_DIST_PATH', OUTSTAND_SILENT_UPDATE_PATH . 'build/' );
 
-if ( file_exists( OUTSTAND_SILENT_UPDATE_PATH . 'vendor/autoload.php' ) ) {
-	require_once OUTSTAND_SILENT_UPDATE_PATH . 'vendor/autoload.php';
+if ( ! file_exists( OUTSTAND_SILENT_UPDATE_PATH . 'vendor/autoload.php' ) ) {
+	return;
 }
+
+require_once OUTSTAND_SILENT_UPDATE_PATH . 'vendor/autoload.php';
 
 PucFactory::buildUpdateChecker(
 	'https://github.com/pixelalbatross/outstand-silent-update/',
