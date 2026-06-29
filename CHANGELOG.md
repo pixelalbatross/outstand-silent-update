@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-06-29
+
+### Fixed
+
+- Abort early when the Composer autoloader is missing instead of triggering a fatal error.
+- Sync the `OUTSTAND_SILENT_UPDATE_VERSION` constant with the plugin version.
+
 ## [1.1.1] - 2026-05-08
 
 - Added automated GitHub Release packaging via reusable release workflow; installation now points to the latest release ZIP.

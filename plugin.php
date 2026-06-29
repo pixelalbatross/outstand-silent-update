@@ -6,7 +6,7 @@
  * Plugin URI:        https://outstand.site/?utm_source=wp-plugins&utm_medium=outstand-silent-update&utm_campaign=plugin-uri
  * Requires at least: 6.7
  * Requires PHP:      8.2
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Outstand
  * Author URI:        https://outstand.site/?utm_source=wp-plugins&utm_medium=outstand-silent-update&utm_campaign=author-uri
  * License:           GPL-3.0-or-later
@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'OUTSTAND_SILENT_UPDATE_VERSION', '1.1.0' );
+define( 'OUTSTAND_SILENT_UPDATE_VERSION', '1.1.2' );
 define( 'OUTSTAND_SILENT_UPDATE_BASENAME', plugin_basename( __FILE__ ) );
 define( 'OUTSTAND_SILENT_UPDATE_URL', plugin_dir_url( __FILE__ ) );
 define( 'OUTSTAND_SILENT_UPDATE_PATH', plugin_dir_path( __FILE__ ) );

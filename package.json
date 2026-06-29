@@ -1,6 +1,6 @@
 {
   "name": "outstand-silent-update",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Update a post without changing its modified date in the Block Editor.",
   "contributors": [
     {
