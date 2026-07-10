@@ -7,6 +7,13 @@ use WP_REST_Request;
 class SilentUpdate extends BaseModule {
 
 	/**
+	 * Lifetime, in seconds, of the cross-request silent-update marker.
+	 *
+	 * @var int
+	 */
+	private const MARKER_TTL = 60;
+
+	/**
 	 * Whether a silent update was requested in the current request.
 	 *
 	 * @var bool
@@ -43,6 +50,17 @@ class SilentUpdate extends BaseModule {
 		if ( 'silent' === $update_type ) {
 			$this->is_silent_update = true;
 			add_filter( 'wp_insert_post_data', [ $this, 'preserve_modified_date' ], 10, 4 );
+
+			// Persist a short-lived marker so the follow-up legacy-metabox save
+			// (a separate `action=editpost` request that never hits the REST
+			// pipeline) can still detect the silent update. Scoped by post ID
+			// and user ID so one user's flag can't suppress another user's
+			// concurrent metabox save on the same post.
+			$post_id = isset( $request['id'] ) ? (int) $request['id'] : 0;
+
+			if ( $post_id > 0 ) {
+				set_transient( $this->marker_key( $post_id ), 1, self::MARKER_TTL );
+			}
 		}
 
 		return $prepared_post;
@@ -96,15 +114,17 @@ class SilentUpdate extends BaseModule {
 	 */
 	public function preserve_modified_date_on_metabox_update( array $data, array $postarr, array $unsanitized_postarr, bool $update ): array {
 
-		if ( ! $this->is_silent_update ) {
-			return $data;
-		}
-
 		if ( ! $update || ! isset( $data['post_type'] ) ) {
 			return $data;
 		}
 
 		if ( ! in_array( $data['post_type'], Plugin::get_post_types(), true ) ) {
+			return $data;
+		}
+
+		$post_id = isset( $postarr['ID'] ) ? (int) $postarr['ID'] : 0;
+
+		if ( ! $this->is_silent_update_for_post( $post_id ) ) {
 			return $data;
 		}
 
@@ -118,6 +138,10 @@ class SilentUpdate extends BaseModule {
 		) {
 			$data['post_modified']     = $postarr['post_modified'];
 			$data['post_modified_gmt'] = $postarr['post_modified_gmt'];
+
+			// Marker consumed by the metabox save; drop it so it can't leak
+			// into a later save in this or another request.
+			delete_transient( $this->marker_key( $post_id ) );
 		}
 
 		return $data;
@@ -131,5 +155,37 @@ class SilentUpdate extends BaseModule {
 	private function is_legacy_metabox_update(): bool {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		return isset( $_REQUEST['action'] ) && 'editpost' === $_REQUEST['action'] && ( empty( $_REQUEST['post_type'] ) || 'attachment' !== $_REQUEST['post_type'] );
+	}
+
+	/**
+	 * Whether the given post is under a silent update, in this request or a
+	 * follow-up one carrying the cross-request marker.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return bool
+	 */
+	private function is_silent_update_for_post( int $post_id ): bool {
+
+		if ( $this->is_silent_update ) {
+			return true;
+		}
+
+		if ( $post_id <= 0 ) {
+			return false;
+		}
+
+		return (bool) get_transient( $this->marker_key( $post_id ) );
+	}
+
+	/**
+	 * Build the transient key for the cross-request silent-update marker.
+	 *
+	 * Scoped by post ID and current user ID.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return string
+	 */
+	private function marker_key( int $post_id ): string {
+		return sprintf( 'outstand_silent_update_%d_%d', $post_id, get_current_user_id() );
 	}
 }

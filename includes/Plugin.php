@@ -12,6 +12,13 @@ class Plugin {
 	private static ?Plugin $instance = null;
 
 	/**
+	 * Registered module instances, keyed by class name.
+	 *
+	 * @var array<class-string<BaseModule>, BaseModule>
+	 */
+	private array $modules = [];
+
+	/**
 	 * Returns singleton instance.
 	 *
 	 * @return Plugin The singleton instance.
@@ -40,8 +47,19 @@ class Plugin {
 		foreach ( $modules as $module ) {
 			if ( $module instanceof BaseModule && $module->can_register() ) {
 				$module->register();
+				$this->modules[ $module::class ] = $module;
 			}
 		}
+	}
+
+	/**
+	 * Get a registered module instance by class name.
+	 *
+	 * @param string $class_name Fully-qualified module class name.
+	 * @return BaseModule|null The module instance, or null if not registered.
+	 */
+	public function get_module( string $class_name ): ?BaseModule {
+		return $this->modules[ $class_name ] ?? null;
 	}
 
 	/**

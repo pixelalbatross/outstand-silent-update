@@ -6,6 +6,7 @@ node_modules/
 .node_history
 package-lock.json
 **/package-lock.json
+*.result.cache
 
 #---------------------------
 # System

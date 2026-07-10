@@ -6,7 +6,7 @@
  * Plugin URI:        https://outstand.site/?utm_source=wp-plugins&utm_medium=outstand-silent-update&utm_campaign=plugin-uri
  * Requires at least: 6.7
  * Requires PHP:      8.2
- * Version:           1.1.2
+ * Version:           1.1.3
  * Author:            Outstand
  * Author URI:        https://outstand.site/?utm_source=wp-plugins&utm_medium=outstand-silent-update&utm_campaign=author-uri
  * License:           GPL-3.0-or-later
@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'OUTSTAND_SILENT_UPDATE_VERSION', '1.1.2' );
+define( 'OUTSTAND_SILENT_UPDATE_VERSION', '1.1.3' );
 define( 'OUTSTAND_SILENT_UPDATE_BASENAME', plugin_basename( __FILE__ ) );
 define( 'OUTSTAND_SILENT_UPDATE_URL', plugin_dir_url( __FILE__ ) );
 define( 'OUTSTAND_SILENT_UPDATE_PATH', plugin_dir_path( __FILE__ ) );
@@ -39,11 +39,13 @@ if ( ! file_exists( OUTSTAND_SILENT_UPDATE_PATH . 'vendor/autoload.php' ) ) {
 
 require_once OUTSTAND_SILENT_UPDATE_PATH . 'vendor/autoload.php';
 
-PucFactory::buildUpdateChecker(
-	'https://github.com/pixelalbatross/outstand-silent-update/',
-	__FILE__,
-	'outstand-silent-update'
-)->setBranch( 'main' );
+if ( class_exists( PucFactory::class ) ) {
+	PucFactory::buildUpdateChecker(
+		'https://github.com/pixelalbatross/outstand-silent-update/',
+		__FILE__,
+		'outstand-silent-update'
+	)->setBranch( 'main' );
+}
 
 /**
  * Load the plugin.

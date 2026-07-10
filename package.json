@@ -1,6 +1,6 @@
 {
   "name": "outstand-silent-update",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Update a post without changing its modified date in the Block Editor.",
   "contributors": [
     {
@@ -20,7 +20,11 @@
     "lint:js": "wp-scripts lint-js",
     "lint:js:fix": "wp-scripts lint-js --fix",
     "lint:css": "wp-scripts lint-style",
-    "format": "wp-scripts format"
+    "format": "wp-scripts format",
+    "wp-env": "wp-env",
+    "wp-env:clean": "wp-env clean all",
+    "test:setup": "npm run wp-env start",
+    "test:unit": "wp-env run tests-cli --env-cwd='wp-content/plugins/outstand-silent-update' vendor/bin/phpunit --testsuite=default"
   },
   "engines": {
     "node": ">=20.0.0",
@@ -36,6 +40,7 @@
     "@wordpress/plugins": "^7.36.0"
   },
   "devDependencies": {
+    "@wordpress/env": "^10.36.0",
     "@wordpress/scripts": "^30.12.0"
   }
 }
