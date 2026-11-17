@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: plugin.php
-msgid "Update a post without changing its modified date in the Block Editor."
+msgid "Save a published post in the block editor without changing its last modified date."
 msgstr ""
 
 #. Author of the plugin

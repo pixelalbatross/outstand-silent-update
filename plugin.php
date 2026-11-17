@@ -2,7 +2,7 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       Outstand Silent Update
- * Description:       Update a post without changing its modified date in the Block Editor.
+ * Description:       Save a published post in the block editor without changing its last modified date.
  * Plugin URI:        https://outstand.site/?utm_source=wp-plugins&utm_medium=outstand-silent-update&utm_campaign=plugin-uri
  * Requires at least: 6.7
  * Requires PHP:      8.2

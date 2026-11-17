@@ -1,6 +1,6 @@
 # Outstand Silent Update
 
-> Update a post without changing its modified date in the Block Editor.
+> Save a published post in the block editor without changing its last modified date.
 
 ## Description
 

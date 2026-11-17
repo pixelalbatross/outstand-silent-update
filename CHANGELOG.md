@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased]
 
+### Changed
+
+- Reword the plugin description to say that it saves a published post in the block editor without changing its last modified date, and add it to `composer.json`.
+
 ## [1.1.3] - 2026-07-10
 
 ### Fixed

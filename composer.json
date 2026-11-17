@@ -1,5 +1,6 @@
 {
   "name": "outstand/silent-update",
+  "description": "Save a published post in the block editor without changing its last modified date.",
   "type": "wordpress-plugin",
   "license": "GPL-3.0-or-later",
   "authors": [
